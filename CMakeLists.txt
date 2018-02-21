@@ -1,35 +1,47 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.6)
 
 # Global option #
 #################
 
-# PybindUtil 0 #
-#######################
+set (CMAKE_CXX_STANDARD 14)
 
-project(PybindUtil VERSION 0.1 LANGUAGES CXX)
+# Pybind11Util #
+##############
 
-target_include_directories(PybindUtil INTERFACE
+project(Pybind11Util VERSION 0.1 LANGUAGES CXX)
+
+add_library(Pybind11Util INTERFACE)
+
+target_include_directories(Pybind11Util INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>  
     $<INSTALL_INTERFACE:inc>
 )
 
 # Add pybind
-add_subdirectory(pybind11)
+add_subdirectory(pybind)
 
-target_link_libraries(PybindUtil PUBLIC pybind11::module)
+target_link_libraries(Pybind11Util INTERFACE pybind11::module)
 
-set_target_properties(PybindUtil PROPERTIES PREFIX "${PYTHON_MODULE_PREFIX}"
-                                            SUFFIX "${PYTHON_MODULE_EXTENSION}")
+# set_target_properties(Pybind11Util PROPERTIES PREFIX "${PYTHON_MODULE_PREFIX}"
+#                                             SUFFIX "${PYTHON_MODULE_EXTENSION}")
+
+
+# Test #
+########
+
+enable_testing()
+
+add_subdirectory(test)
 
 
 # Install #
 ###########
 
-install(TARGETS PybindUtil EXPORT PybindUtilTargets)
+# install(TARGETS Pybind11Util EXPORT Pybind11UtilTargets)
 
-install(DIRECTORY inc/ma DESTINATION include)
+# install(DIRECTORY inc/ma DESTINATION include)
 
-install(EXPORT PybindUtilTargets DESTINATION lib/cmake/PybindUtil)
+# install(EXPORT Pybind11UtilTargets DESTINATION lib/cmake/Pybind11Util)
 
-export(TARGETS PybindUtil FILE PybindUtilTargets.cmake)
+# export(TARGETS Pybind11Util FILE Pybind11UtilTargets.cmake)
 

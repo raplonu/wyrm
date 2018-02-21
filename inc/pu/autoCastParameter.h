@@ -79,7 +79,7 @@ namespace pu
 
     #else //(__cplusplus < 201703L)
 
-    template <typename Param, typename...Args, typename Fn, typename = std::enable_if_t<is_member_function_pointer<Fn>::value>>
+    template <typename Param, typename...Args, typename Fn, typename = std::enable_if_t<std::is_member_function_pointer<Fn>::value>>
     auto castParameter_impl(types<Param, Args...>, Fn && fn) {
         return [&fn](Param param, typename Adapt<Args>::type... args)
         {
@@ -87,7 +87,7 @@ namespace pu
         };
     }
 
-    template <typename...Args, typename Fn, typename = std::enable_if_t<!is_member_function_pointer<Fn>::value>>
+    template <typename...Args, typename Fn, typename = std::enable_if_t<!std::is_member_function_pointer<Fn>::value>>
     auto castParameter_impl(types<Args...>, Fn && fn) {
         return [&fn](typename Adapt<Args>::type... args)
         {

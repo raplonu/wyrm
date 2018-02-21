@@ -3,14 +3,14 @@
 #define NUMPY_HANDLER_H
 
 #include <pybind11/numpy.h>
-#include "autoCastParameter.h"
+#include <pu/autoCastParameter.h>
 
 namespace pu
 {
     template<typename T>
     struct Adapt<T const *>
     {
-        using type = py::array_t<T> const;
+        using type = pybind11::array_t<T> const;
 
         static T const * cast(type t)
         {
@@ -21,7 +21,7 @@ namespace pu
     template<typename T>
     struct Adapt<T*>
     {
-        using type = py::array_t<T>;
+        using type = pybind11::array_t<T>;
 
         static T * cast(type t)
         {
