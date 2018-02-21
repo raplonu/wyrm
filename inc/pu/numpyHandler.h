@@ -2,50 +2,34 @@
 #ifndef NUMPY_HANDLER_H
 #define NUMPY_HANDLER_H
 
-//#include <pybind11/numpy.h>
+#include <pybind11/numpy.h>
 #include "autoCastParameter.h"
 
-namespace py
+namespace pu
 {
     template<typename T>
-    struct array_t
+    struct Adapt<T const *>
     {
-        T * t;
-        array_t(T * t):t(t){}
+        using type = py::array_t<T> const;
 
-        T * mutable_data()
+        static T const * cast(type t)
         {
-            return t;
-        }
-
-        T const * data() const
-        {
-            return t;
+            return t.data();
         }
     };
+
+    template<typename T>
+    struct Adapt<T*>
+    {
+        using type = py::array_t<T>;
+
+        static T * cast(type t)
+        {
+            return t.mutable_data();
+        }
+    };
+
 }
-
-template<typename T>
-struct Adapt<T const *>
-{
-    using type = py::array_t<T> const;
-
-    static T const * cast(type t)
-    {
-        return t.data();
-    }
-};
-
-template<typename T>
-struct Adapt<T*>
-{
-    using type = py::array_t<T>;
-
-    static T * cast(type t)
-    {
-        return t.mutable_data();
-    }
-};
 
 #endif //NUMPY_HANDLER_H
 
