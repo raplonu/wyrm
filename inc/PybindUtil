@@ -2,6 +2,8 @@
 #ifndef PYBIND_UTIL_H
 #define PYBIND_UTIL_H
 
+#include <pybind11/pybind11.h>
+
 #include <pu/autoCastParameter.h>
 #include <pu/numpyHandler.h>
 
