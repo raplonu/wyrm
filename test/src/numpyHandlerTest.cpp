@@ -25,5 +25,4 @@ namespace
         EXPECT_EQ(add_1(1), 2);
     }
 
-
 }
