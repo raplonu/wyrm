@@ -1,11 +1,10 @@
-#pragma once
-#ifndef NUMPY_HANDLER_H
-#define NUMPY_HANDLER_H
+#ifndef WY_NUMPY_HANDLER_H
+#define WY_NUMPY_HANDLER_H
 
 #include <pybind11/numpy.h>
-#include <pu/autoCastParameter.h>
+#include <wy/autoCastParameter.h>
 
-namespace pu
+namespace wy
 {
     template<typename T>
     struct Adapt<T const *>
@@ -31,5 +30,5 @@ namespace pu
 
 }
 
-#endif //NUMPY_HANDLER_H
+#endif //WY_NUMPY_HANDLER_H
 

@@ -1,12 +1,11 @@
-#pragma once
-#ifndef AUTO_CAST_PARAMETER_H
-#define AUTO_CAST_PARAMETER_H
+#ifndef WYRM_AUTO_CAST_PARAMETER_H
+#define WYRM_AUTO_CAST_PARAMETER_H
 
 #include <utility>
 #include <functional>
 #include <type_traits>
 
-namespace pu
+namespace wy
 {
     template<typename...>struct types{using type=types;};
 
@@ -104,4 +103,4 @@ namespace pu
     #endif //(__cplusplus >= 201703L)
 }
 
-#endif //AUTO_CAST_PARAMETER_H
+#endif //WYRM_AUTO_CAST_PARAMETER_H

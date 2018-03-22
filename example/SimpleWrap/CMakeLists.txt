@@ -16,7 +16,7 @@ add_library(SimpleWrap MODULE
 
 target_include_directories(SimpleWrap PRIVATE inc)
 
-target_link_libraries(SimpleWrap PRIVATE Pybind11Util)
+target_link_libraries(SimpleWrap PRIVATE wyrm)
 
 set_target_properties(SimpleWrap PROPERTIES PREFIX "${PYTHON_MODULE_PREFIX}"
                                             SUFFIX "${PYTHON_MODULE_EXTENSION}")

@@ -1,28 +1,38 @@
 #include <gtest/gtest.h>
 
-#include <ma/ma>
-#include <PybindUtil>
+#include <wyrm>
 
-using namespace pu;
+using namespace wy;
 
 namespace
 {
-    void fun1(){}
+    int fun1(){return 3;}
 
     TEST(Numpy_handler, simple_interface)
     {
         auto f = castParameter(fun1);
 
-        f();
+        EXPECT_EQ(f(), 3);
     }
 
     int fun2(int i){ return i + 1;}
 
     TEST(Numpy_handler, simple_return)
     {
-        auto add_1 = castParameter(fun2);
+        auto f2 = castParameter(fun2);
 
-        EXPECT_EQ(add_1(1), 2);
+        EXPECT_EQ(f2(1), 2);
+    }
+
+    const int * fun3(const int * ptr){return ptr;}
+
+    TEST(Numpy_handler, numpy_data_return)
+    {
+        auto f3 = castParameter(fun3);
+
+        pybind11::array_t<int> data;
+
+        EXPECT_EQ(f3(data), data.data());
     }
 
 }
