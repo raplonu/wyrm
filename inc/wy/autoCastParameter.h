@@ -20,6 +20,9 @@ namespace wy
     template<typename R, typename T, typename...Args>
     struct args<R(T::*)(Args...)>:types<T&, Args...>{};
 
+    template<typename R, typename T, typename...Args>
+    struct args<R(T::*)(Args...) const>:types<T&, Args...>{};
+
     template<typename R, typename...Args>
     struct args<std::function<R (Args...)>>:types<Args...>{};
 

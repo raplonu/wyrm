@@ -25,9 +25,9 @@ target_link_libraries(wyrm INTERFACE pybind11::module)
 # Test #
 ########
 
-enable_testing()
+# enable_testing()
 
-add_subdirectory(test)
+# add_subdirectory(test)
 
 add_subdirectory(example/SimpleWrap)
 
