@@ -1,6 +1,0 @@
-setup.py
-SimpleWrap.egg-info/PKG-INFO
-SimpleWrap.egg-info/SOURCES.txt
-SimpleWrap.egg-info/dependency_links.txt
-SimpleWrap.egg-info/not-zip-safe
-SimpleWrap.egg-info/top_level.txt
