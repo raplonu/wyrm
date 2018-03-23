@@ -9,7 +9,7 @@ namespace wy
     template<typename T>
     struct Adapt<T const *>
     {
-        using type = pybind11::array_t<T> const;
+        using type = pybind11::array_t<T> const &;
 
         static T const * cast(type t)
         {
@@ -18,9 +18,9 @@ namespace wy
     };
 
     template<typename T>
-    struct Adapt<T*>
+    struct Adapt<T *>
     {
-        using type = pybind11::array_t<T>;
+        using type = pybind11::array_t<T> &;
 
         static T * cast(type t)
         {
