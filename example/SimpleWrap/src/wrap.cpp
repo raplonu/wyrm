@@ -1,5 +1,4 @@
-#include <pybind11/pybind11.h>
-#include <PybindUtil>
+#include <wyrm>
 
 namespace py = pybind11;
 
@@ -9,6 +8,6 @@ PYBIND11_MODULE(SimpleWrap, m) {
     m.doc() = "Simplewrap library module";
 
     m.def("add", &me_add, "add two number");
-    m.def("sum", pu::castParameter(me_sum), "sum size elements of ptr");
+    m.def("sum", wy::castParameter(me_sum), "sum size elements of ptr");
 
 }

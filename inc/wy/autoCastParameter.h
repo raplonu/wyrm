@@ -1,12 +1,11 @@
-#pragma once
-#ifndef AUTO_CAST_PARAMETER_H
-#define AUTO_CAST_PARAMETER_H
+#ifndef WYRM_AUTO_CAST_PARAMETER_H
+#define WYRM_AUTO_CAST_PARAMETER_H
 
 #include <utility>
 #include <functional>
 #include <type_traits>
 
-namespace pu
+namespace wy
 {
     template<typename...>struct types{using type=types;};
 
@@ -20,6 +19,9 @@ namespace pu
 
     template<typename R, typename T, typename...Args>
     struct args<R(T::*)(Args...)>:types<T&, Args...>{};
+
+    template<typename R, typename T, typename...Args>
+    struct args<R(T::*)(Args...) const>:types<T&, Args...>{};
 
     template<typename R, typename...Args>
     struct args<std::function<R (Args...)>>:types<Args...>{};
@@ -81,7 +83,7 @@ namespace pu
 
     template <typename Param, typename...Args, typename Fn, typename = std::enable_if_t<std::is_member_function_pointer<Fn>::value>>
     auto castParameter_impl(types<Param, Args...>, Fn && fn) {
-        return [&fn](Param param, typename Adapt<Args>::type... args)
+        return [fn](Param param, typename Adapt<Args>::type... args)
         {
             return (param.*fn)(Adapt<Args>::cast(args)...);
         };
@@ -104,4 +106,4 @@ namespace pu
     #endif //(__cplusplus >= 201703L)
 }
 
-#endif //AUTO_CAST_PARAMETER_H
+#endif //WYRM_AUTO_CAST_PARAMETER_H

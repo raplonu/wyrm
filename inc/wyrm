@@ -1,0 +1,9 @@
+#ifndef WYRM_LIB
+#define WYRM_LIB
+
+#include <pybind11/pybind11.h>
+
+#include <wy/autoCastParameter.h>
+#include <wy/numpyHandler.h>
+
+#endif //WYRM_LIB
