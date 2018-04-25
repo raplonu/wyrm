@@ -8,7 +8,7 @@ set (CMAKE_CXX_STANDARD 14)
 # Wyrm #
 ##############
 
-project(wyrm VERSION 0.1 LANGUAGES CXX)
+project(wyrm VERSION 1.0 LANGUAGES CXX)
 
 add_library(wyrm INTERFACE)
 
