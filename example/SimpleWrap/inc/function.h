@@ -3,6 +3,6 @@
 
 int me_add(int i, int j);
 
-int me_sum(int * ptr, int size);
+int me_sum(int* ptr, int size);
 
-#endif //FUNCTION_H
+#endif  // FUNCTION_H
