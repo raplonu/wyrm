@@ -47,7 +47,7 @@ struct DefaultAdapter {
 
 template <template<typename...> class Adaptator = DefaultAdapter, typename Fn, typename... FnArgs>
 auto castParameter_impl(Fn&& fn, types<FnArgs...>) {
-  return [&fn](typename Adaptator<FnArgs>::type... args) {
+  return [&fn](typename Adaptator<FnArgs>::type... args) -> decltype(auto) {
     // Use invoke to manage method function call
     return std::invoke(fn, Adaptator<FnArgs>::cast(std::forward<typename Adaptator<FnArgs>::type>(args))...);
   };
@@ -82,7 +82,7 @@ template <
     typename Fn, typename Obj, typename... FnArgs,
     typename = std::enable_if_t<std::is_member_function_pointer<Fn>::value>>
 auto castParameter_impl(Fn&& fn, types<Obj, FnArgs...>) {
-  return [fn](Obj obj, typename Adaptator<FnArgs>::type... args) {
+  return [fn](Obj obj, typename Adaptator<FnArgs>::type... args) -> decltype(auto) {
     return (obj.*fn)(Adaptator<FnArgs>::cast(std::forward<typename Adaptator<FnArgs>::type>(args))...);
   };
 }
@@ -93,7 +93,7 @@ template <
     typename Fn, typename... FnArgs,
     typename = std::enable_if_t<not std::is_member_function_pointer<Fn>::value>>
 auto castParameter_impl(Fn&& fn, types<FnArgs...>) {
-  return [&fn](typename Adaptator<FnArgs>::type... args) {
+  return [&fn](typename Adaptator<FnArgs>::type... args) -> decltype(auto) {
     return fn(Adaptator<FnArgs>::cast(std::forward<typename Adaptator<FnArgs>::type>(args))...);
   };
 }
