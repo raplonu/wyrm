@@ -18,11 +18,27 @@ target_include_directories(wyrm INTERFACE
 )
 
 # Add pybind
-add_subdirectory(pybind)
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.11.4")
+    include(FetchContent)
+    FetchContent_Declare(
+        pybind11
+        GIT_REPOSITORY https://github.com/pybind/pybind11.git
+        GIT_TAG        v2.2.3
+    )
+    
+    FetchContent_GetProperties(pybind11)
+    if(NOT pybind11_POPULATED)
+        FetchContent_Populate(pybind11)
+        add_subdirectory(${pybind11_SOURCE_DIR} ${pybind11_BINARY_DIR})
+    endif()
+    
+else()
+    
+    add_subdirectory(pybind)
+
+endif()
 
 target_link_libraries(wyrm INTERFACE pybind11::module)
-
-
 
 ########################################################################
 #
